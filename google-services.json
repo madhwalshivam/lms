@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "962458413514",
+    "project_id": "urban-cruise-da1b7",
+    "storage_bucket": "urban-cruise-da1b7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:962458413514:android:daa03eee23bacd2105c733",
+        "android_client_info": {
+          "package_name": "com.urbancruise.lms"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACEBW2z_LqmLC1W7MQaZXqz8RPVQjDKGA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
