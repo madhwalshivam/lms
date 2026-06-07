@@ -14,7 +14,7 @@ export const USE_REAL_BACKEND = true;
  * It will look like:  https://urban-cruise-lms-backend.onrender.com
  * Do NOT add a trailing slash and do NOT add "/api" here — that is added below.
  */
-export const PRODUCTION_API_HOST = 'https://urban-cruise-lms-backend.onrender.com';
+export const PRODUCTION_API_HOST = 'https://lms-iyrh.onrender.com';
 
 export const API_BASE_URL = Platform.select({
   // The packaged APK / real device must use the public Render URL.
