@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "urban-cruise-lms",
+    "name": "Urban Cruise LMS",
     "slug": "urban-cruise-lms",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -10,8 +10,9 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.urbancruise.lms",
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
+        "backgroundColor": "#ffffff",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
@@ -20,6 +21,15 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      "expo-font"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "f899c854-b3fc-45a8-86d5-14d797af051d"
+      }
+    },
+    "owner": "madhwalshivam"
   }
 }

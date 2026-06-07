@@ -1,0 +1,17 @@
+# Render Blueprint for the Urban Cruise LMS backend.
+# In the Render dashboard: New + > Blueprint, point it at this repo, and it will
+# create the service below. You must still add MONGO_URI and JWT_SECRET as secrets.
+services:
+  - type: web
+    name: urban-cruise-lms-backend
+    runtime: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: MONGO_URI
+        sync: false   # set this manually in the dashboard (MongoDB Atlas URI)
+      - key: JWT_SECRET
+        generateValue: true   # Render generates a strong random secret
