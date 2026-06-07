@@ -145,6 +145,27 @@ export class NotificationService {
   }
 
   /**
+   * Show a local notification immediately on this device.
+   * Works even without a push server / FCM, so the foreground (app-open)
+   * case always shows a banner.
+   */
+  static async presentLocalNotification(
+    title: string,
+    body: string,
+    data: Record<string, any> = {}
+  ): Promise<void> {
+    if (Platform.OS === 'web') return;
+    try {
+      await Notifications.scheduleNotificationAsync({
+        content: { title, body, data, sound: 'default' },
+        trigger: null, // fire right away
+      });
+    } catch (e) {
+      console.warn('Local notification failed:', e);
+    }
+  }
+
+  /**
    * Set up notification listeners (foreground and background interactions)
    */
   static setupNotificationsListeners(onNotificationReceived?: (notification: Notifications.Notification) => void) {

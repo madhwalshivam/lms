@@ -198,15 +198,6 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
           </TouchableOpacity>
         </Card>
 
-        {/* Security Session Info */}
-        <Card style={styles.infoCard}>
-          <Text style={[styles.infoTitle, { color: colors.textSecondary, fontSize: typography.fontSizes.xs }]}>
-            SECURED ENDPOINT ARCHITECTURE
-          </Text>
-          <Text style={[styles.infoDesc, { color: colors.textSecondary, fontSize: 11 }]}>
-            Logged in via encrypted JSON Web Token (JWT). Token credentials refresh automatically. Secure database connection synced.
-          </Text>
-        </Card>
 
         {/* Logout Button */}
         <CustomButton

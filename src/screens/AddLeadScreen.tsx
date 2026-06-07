@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { useTheme, useAppDispatch } from '../hooks';
 import { createLeadAsync } from '../redux/slices/leadsSlice';
+import { NotificationService } from '../services/notificationService';
 import { CustomButton } from '../components/CustomButton';
 import { Card } from '../components/Card';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -90,6 +91,7 @@ export const AddLeadScreen: React.FC<AddLeadScreenProps> = ({ navigation }) => {
       return;
     }
 
+    setLoading(true);
     dispatch(createLeadAsync({
       name: fullName.trim(),
       phone: phone.trim(),
@@ -106,6 +108,12 @@ export const AddLeadScreen: React.FC<AddLeadScreenProps> = ({ navigation }) => {
       .unwrap()
       .then(() => {
         setLoading(false);
+        // Instant on-device notification (works in foreground without FCM)
+        NotificationService.presentLocalNotification(
+          'New Lead Added! ✈️',
+          `${fullName.trim()} — ${destination}`,
+          { type: 'new_lead' }
+        );
         Alert.alert('Success', 'Lead added successfully!', [
           { text: 'OK', onPress: () => navigation.goBack() }
         ]);

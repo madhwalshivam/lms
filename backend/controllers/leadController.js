@@ -121,17 +121,37 @@ exports.createLead = async (req, res) => {
       createdDate: today,
     });
 
-    // Send push notification if assigned to an executive
-    if (assignedExecutive && assignedExecutive !== 'Unassigned') {
-      const executiveUser = await User.findOne({ name: assignedExecutive });
-      if (executiveUser && executiveUser.expoPushTokens.length > 0) {
+    // Notify all admins + the assigned executive (if any) about the new lead
+    try {
+      const recipients = [];
+
+      // All admins always get notified of a new lead
+      const admins = await User.find({ role: 'Admin' });
+      for (const admin of admins) {
+        if (admin.expoPushTokens && admin.expoPushTokens.length > 0) {
+          recipients.push(...admin.expoPushTokens);
+        }
+      }
+
+      // The assigned executive (if the lead was assigned on creation)
+      if (assignedExecutive && assignedExecutive !== 'Unassigned') {
+        const executiveUser = await User.findOne({ name: assignedExecutive });
+        if (executiveUser && executiveUser.expoPushTokens.length > 0) {
+          recipients.push(...executiveUser.expoPushTokens);
+        }
+      }
+
+      const uniqueRecipients = [...new Set(recipients)];
+      if (uniqueRecipients.length > 0) {
         await sendPushNotification(
-          executiveUser.expoPushTokens,
-          'New Lead Assigned! ✈️',
-          `New manual lead ${name} for ${destination} has been assigned to you.`,
-          { leadId: lead.id }
+          uniqueRecipients,
+          'New Lead Added! ✈️',
+          `${name} — ${destination} (${leadSource || 'Manual'})`,
+          { leadId: lead.id, type: 'new_lead' }
         );
       }
+    } catch (pushErr) {
+      console.error('Failed to send new-lead push notification:', pushErr);
     }
 
     // Save notification log in DB

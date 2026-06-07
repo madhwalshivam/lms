@@ -187,11 +187,6 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
           />
         </View>
 
-        <View style={styles.footer}>
-          <Text style={[styles.footerText, { color: colors.textSecondary, fontSize: typography.fontSizes.xs }]}>
-            Secured JWT travel agent login platform.
-          </Text>
-        </View>
       </ScrollView>
     </KeyboardAvoidingView>
   );
